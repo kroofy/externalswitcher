@@ -18,7 +18,6 @@
     var mainOptions = {
       buttons: mainFormattingButtons,
       toolbarExternal: '.external-main-toolbar',
-      convertLinks: false,
       plugins: ['externalswitcher']
     };
 

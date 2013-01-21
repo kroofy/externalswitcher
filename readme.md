@@ -1,26 +1,33 @@
-if (typeof RedactorPlugins === 'undefined') var RedactorPlugins = {};
-if (typeof RedactorToolbars === 'undefined') var RedactorToolbars = [];
+# Redactor External Toolbar Switcher
+---
 
-(function($){
-  RedactorPlugins.externalswitcher = {
-    init: function() {
-      RedactorToolbars.push(this.$toolbar);
+A solution for handling multiple `externalToolbar`s in Redactor.
 
-      $(this.$toolbar).hide();
-      
-      $(this.$editor).bind('focus blur', $.proxy(function (event) {
-        console.log(this);
+See `index.html` for an example.
 
-        if (event.type === 'focus') {
-          for(var i = 0; i < RedactorToolbars.length; i++) {
-            $(RedactorToolbars[i]).hide();
-          }
-          $(this.$toolbar).show();
-        }
-        if (event.type === 'blur') {
-          // $(this.$toolbar).hide();
-        }
-      }, this));
-    }
-  };
-})(jQuery);
+## Quick reference
+
+### Prerequisites
+- Add a `externalswitcher.js` script tag to load the plugin.
+
+  <script src="scripts/redactor/externalswitcher.js"></script>
+
+### Markup
+Add HTML elements for the external toolbars, one for each toolbar.
+
+  <div class="external-header-toolbar"></div>
+  <div class="external-main-toolbar"></div>
+  <div class="external-footer-toolbar"></div>
+
+Make sure each Redactor field has its own unique class name:
+
+  <textarea class="header-redactor redactor"></textarea>
+  <textarea class="main-redactor redactor"></textarea>
+  <textarea lass="footer-redactor redactor"></textarea>
+
+### Javascript
+Reference the unique Redactor fields class names from your markup when setting up your Redactor fields, and don't forget to add the `externalswitcher` plugin to your settings.
+
+  $('.header-redactor').redactor({toolbarExternal: '.external-header-toolbar', plugins: ['externalswitcher']});
+  $('.main-redactor').redactor({toolbarExternal: '.external-main-toolbar', plugins: ['externalswitcher']});
+  $('.footer-redactor').redactor({toolbarExternal: '.external-footer-toolbar', plugins: ['externalswitcher']});
