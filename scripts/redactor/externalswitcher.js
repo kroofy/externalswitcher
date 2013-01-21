@@ -8,18 +8,11 @@ if (typeof RedactorToolbars === 'undefined') var RedactorToolbars = [];
 
       $(this.$toolbar).hide();
       
-      $(this.$editor).bind('focus blur', $.proxy(function (event) {
-        console.log(this);
-
-        if (event.type === 'focus') {
-          for(var i = 0; i < RedactorToolbars.length; i++) {
-            $(RedactorToolbars[i]).hide();
-          }
-          $(this.$toolbar).show();
+      $(this.$editor).focus($.proxy(function (event) {
+        for(var i = 0; i < RedactorToolbars.length; i++) {
+          $(RedactorToolbars[i]).hide();
         }
-        if (event.type === 'blur') {
-          // $(this.$toolbar).hide();
-        }
+        $(this.$toolbar).show();
       }, this));
     }
   };
